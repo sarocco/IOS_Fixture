@@ -75,9 +75,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Create a date object from the string
         if let date = dateFormatter.date(from: date) {
             if date <= Date() {
-                return false
-            } else {
                 return true
+            } else {
+                return false
             }
         }
         return false
@@ -87,7 +87,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     func getNextMatches() -> [Match] {
         var futureMatches: [Match]! = []
         for match in nextMatches{
-            if (compareDate(date: match.date!)){
+            if (!compareDate(date: match.date!)) {
                 futureMatches.append(match)
             }
         }

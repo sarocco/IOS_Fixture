@@ -102,7 +102,7 @@ class MainClassData {
         
         let fourthMatch = Match (date:"30 de Mayo 2018 22:00", group:"Grupo A", stadium: Stadium(name:"Estadio Central", stadiumImage: "Estadio Central"), countryA: uruguay, countryB: arabia, eventA:[], eventB:[])
         
-        let fifthMatch = Match (date:"30 de Mayo 2018 22:00", group:"Grupo B", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: rusia, countryB: arabia, eventA:[], eventB:[])
+        let fifthMatch = Match (date:"01 de Mayo 2018 22:00", group:"Grupo B", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: rusia, countryB: arabia, eventA:[], eventB:[])
     
         let sixthMatch = Match (date:"22 de Junio 2018 20:00", group:"Grupo B",  stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: brasil, countryB: arabia, eventA:[], eventB:[])
         
