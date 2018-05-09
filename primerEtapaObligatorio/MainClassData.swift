@@ -86,6 +86,10 @@ class MainClassData {
         
         let brasil = Country(name:"Brasil",players: braPlayers, dt: DT(name: "Tite",identifier: "DT"), shield:"Brasil", abbreviation: "BRA", nextMatches: []);
         
+        let group1 = Country(name:"1erGrupo",players: [], dt: DT(name: " ",identifier: " "), shield:" ", abbreviation: "GRP1", nextMatches: []);
+        
+        let group2 = Country(name:"2doGrupo",players: [], dt: DT(name: " ",identifier: " "), shield:" ", abbreviation: "GRP2", nextMatches: []);
+        
         //Eventos
         let eventsUru = [Event(icon: "⚽️",player: "Luis Suarez",time: 3),Event(icon: "⚽️",player: "Diego Godín",time: 20), Event(icon: "🛑",player: "Martín Campaña",time: 25), Event(icon: "🔶",player: "Diego Godín",time: 28)]
         
@@ -106,9 +110,10 @@ class MainClassData {
     
         let sixthMatch = Match (date:"22 de Junio 2018 20:00", group:"Grupo B",  stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: brasil, countryB: arabia, eventA:[], eventB:[])
         
+        let seventhMatch = Match (date:"30 de Junio 2018 22:00", group:"Grupo C", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: group1, countryB: group2, eventA:[], eventB:[])
         
         //All Matches
-        let matches = [firstMatch, secondMatch, thirdMatch, fourthMatch, fifthMatch, sixthMatch]
+        let matches = [firstMatch, secondMatch, thirdMatch, fourthMatch, fifthMatch, sixthMatch, seventhMatch]
 
         //Get NextMatches
         for match in matches{

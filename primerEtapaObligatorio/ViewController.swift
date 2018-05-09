@@ -62,7 +62,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let resultA = match.resultCountryA?.hashValue , let resultB = match.resultCountryB?.hashValue {
                 if (resultA > resultB){
                     cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
+                } else if (resultB > resultA) {
+                    cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
                 } else {
+                    cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
                     cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
                 }
             }
@@ -93,8 +96,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vController?.match = match
         vController?.eventsCountryA = match.eventA
         vController?.eventsCountryB = match.eventB
-        
     }
+    
+    func getGoals () -> (Int,Int) {
+        var goalsA: Int = 0
+        var goalsB: Int = 0
+        for match in matches {
+            for event in match.eventA! {
+                if event.icon == "⚽️" {
+                    goalsA = goalsA + 1
+                }
+            }
+            for event in match.eventB! {
+                if event.icon == "⚽️" {
+                goalsB = goalsB + 1
+                }
+            }
+        }
+        return (goalsA, goalsB)
+    }
+    
     
     //Deslect the selected row when go back fron MatchViweController to ViewController
     override func viewWillAppear(_ animated: Bool) {

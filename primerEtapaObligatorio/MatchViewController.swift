@@ -58,7 +58,9 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
             countryBButton.setImage(imagenB,for: UIControlState.normal)
             eventsCountryA = match.eventA
             eventsCountryB = match.eventB
+            
             countryVsCountryLabel.text = match.countryA.abbreviation + "vs" + match.countryB.abbreviation
+            
             //Identify who is the winner to bold the result
             if let resultCountryA = match.resultCountryA?.hashValue , let resultCountryB = match.resultCountryB?.hashValue {
                 if (resultCountryA > resultCountryB){
