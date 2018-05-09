@@ -27,29 +27,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.reloadData()
     }
     
-    //Compare today with the match date
-    func compareDate(date:String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "es_ES")
-        dateFormatter.dateFormat = "dd 'de' MMMM yyyy HH:mm"
-        // Create a date object from the string
-        if let date = dateFormatter.date(from: date) {
-            if date <= Date() {
-                return true
-            } else {
-                return false
-            }
-        }
-        return false
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellMatch", for:indexPath) as? MainCellTableViewCell
         
         // Access to each Match and displays the data of each match in one row of the table
         let match = matches[indexPath.row]
-        cell?.labelDate.text = match.date
+        cell?.labelDate.text = Utils.convertFormater(inputShow: match.date!, newFormat: "dd 'de' MMMM '-' HH:mm")
         cell?.labelStadium.text = match.stadium.name
         cell?.labelGroup.text = match.group
         cell?.labelCountryOne.text = match.countryA.name
@@ -57,21 +41,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell?.pictureCountryOne.image = UIImage(named: match.countryA.shield)
         cell?.labelCountryTwo.text = match.countryB.name
         cell?.pictureCountryTwo.image = UIImage(named: match.countryB.shield)
-        if (compareDate(date: match.date!)){
+        let goals = Utils.getGoals(match: match)
+        if (Utils.compareDate(date: match.date!)){
             //Identify who is the winner to bold the result
-            if let resultA = match.resultCountryA?.hashValue , let resultB = match.resultCountryB?.hashValue {
-                if (resultA > resultB){
-                    cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
-                } else if (resultB > resultA) {
-                    cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
-                } else {
-                    cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
-                    cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
-                }
+            if (goals.0 > goals.1){
+                cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
+            }else if (goals.1 > goals.0){
+                cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
+            }else{
+                cell?.labelResultA.font = UIFont.boldSystemFont(ofSize: 16.0)
+                cell?.labelResultB.font = UIFont.boldSystemFont(ofSize: 16.0)
             }
-            cell?.labelResultA.text = match.resultCountryA
-            cell?.labelResultB.text = match.resultCountryB
-        } else {
+            cell?.labelResultA.text = "- " + String(goals.0)
+            cell?.labelResultB.text = String(goals.1) + " -"
+        }else {
             cell?.labelResultA.text = " "
             cell?.labelResultB.text = " "
         }
@@ -97,25 +80,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vController?.eventsCountryA = match.eventA
         vController?.eventsCountryB = match.eventB
     }
-    
-    func getGoals () -> (Int,Int) {
-        var goalsA: Int = 0
-        var goalsB: Int = 0
-        for match in matches {
-            for event in match.eventA! {
-                if event.icon == "⚽️" {
-                    goalsA = goalsA + 1
-                }
-            }
-            for event in match.eventB! {
-                if event.icon == "⚽️" {
-                goalsB = goalsB + 1
-                }
-            }
-        }
-        return (goalsA, goalsB)
-    }
-    
     
     //Deslect the selected row when go back fron MatchViweController to ViewController
     override func viewWillAppear(_ animated: Bool) {

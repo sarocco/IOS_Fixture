@@ -67,27 +67,11 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 50
     }
     
-    //Compare today with the match date
-    func compareDate(date:String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "es_ES")
-        dateFormatter.dateFormat = "dd 'de' MMMM yyyy HH:mm"
-        // Create a date object from the string
-        if let date = dateFormatter.date(from: date) {
-            if date <= Date() {
-                return true
-            } else {
-                return false
-            }
-        }
-        return false
-    }
-    
     //Function to get only the next matches since this match
     func getNextMatches() -> [Match] {
         var futureMatches: [Match]! = []
         for match in nextMatches{
-            if (!compareDate(date: match.date!)) {
+            if (!Utils.compareDate(date: match.date!)) {
                 futureMatches.append(match)
             }
         }
@@ -112,13 +96,13 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (country?.name == match.countryA.name){
             cell.countryImage.image = UIImage(named: match.countryB.shield)
             cell.countryName.text = match.countryB.name
-            cell.matchDate.text = match.date
+            cell.matchDate.text = Utils.convertFormater(inputShow: match.date!, newFormat:"dd'/'MM")
             cell.stadiumName.text = match.stadium.name
             return cell
         }else{
             cell.countryImage.image = UIImage(named: match.countryA.shield)
             cell.countryName.text = match.countryA.name
-            cell.matchDate.text = match.date
+            cell.matchDate.text = Utils.convertFormater(inputShow: match.date!, newFormat:"dd'/'MM")
             cell.stadiumName.text = match.stadium.name
             return cell
         }

@@ -95,22 +95,24 @@ class MainClassData {
         
         let eventsRus = [Event(icon: "🛑",player: "I. Akinfeev",time: 2), Event(icon: "🛑",player: "R.Neustädter",time: 20), Event(icon: "🔶",player: "I. Selikhov",time: 29)]
         
-        let eventsEgi = [Event(icon: "⚽️",player: "Tarek Hamed",time: 48),Event(icon: "🛑",player: "Mahmoud Kahraba",time: 3)]
+        let eventsEgi = [Event(icon: "⚽️",player: "Tarek Hamed",time: 48),Event(icon: "🛑",player: "Mahmoud Kahraba",time: 3), Event(icon: "⚽️",player: "Tarek Hamed",time: 70)]
         
         //Matches
-        let firstMatch = Match (date:"02 de Mayo 2018 10:00", group:"Grupo A",  stadium: Stadium(name:"Estadio Central", stadiumImage: "Estadio Central"), countryA: uruguay, countryB: rusia, eventA: eventsUru, eventB:eventsRus, resultCountryA: "2", resultCountryB: "0")
+        let firstMatch = Match (date:"02 de Mayo 2018 10:00", group:"Grupo A",  stadium: Stadium(name:"Estadio Central", stadiumImage: "Estadio Central"), countryA: uruguay, countryB: rusia, eventA: eventsUru, eventB:eventsRus)
+      
         
-        let secondMatch = Match (date:"08 de Mayo 2018 10:00", group:"Grupo A", stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: uruguay, countryB: egipto, eventA: eventsUru, eventB: eventsEgi, resultCountryA: "1", resultCountryB: "1")
+        let secondMatch = Match (date:"08 de Mayo 2018 10:00", group:"Grupo A", stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: uruguay, countryB: egipto, eventA: eventsUru, eventB: eventsEgi)
+       
         
         let thirdMatch = Match (date:"20 de Mayo 2018 18:00", group:"Grupo A",stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: arabia, countryB: egipto, eventA:[], eventB:[])
         
         let fourthMatch = Match (date:"30 de Mayo 2018 22:00", group:"Grupo A", stadium: Stadium(name:"Estadio Central", stadiumImage: "Estadio Central"), countryA: uruguay, countryB: arabia, eventA:[], eventB:[])
         
-        let fifthMatch = Match (date:"01 de Mayo 2018 22:00", group:"Grupo B", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: rusia, countryB: arabia, eventA:[], eventB:[])
+        let fifthMatch = Match (date:"01 de Junio 2018 22:00", group:"Grupo B", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: rusia, countryB: arabia, eventA:[], eventB:[])
     
         let sixthMatch = Match (date:"22 de Junio 2018 20:00", group:"Grupo B",  stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: brasil, countryB: arabia, eventA:[], eventB:[])
         
-        let seventhMatch = Match (date:"30 de Junio 2018 22:00", group:"Grupo C", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: group1, countryB: group2, eventA:[], eventB:[])
+        let seventhMatch = Match (date:"30 de Junio 2018 22:00", group:"8vos de final", stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: group1, countryB: group2, eventA:[], eventB:[])
         
         //All Matches
         let matches = [firstMatch, secondMatch, thirdMatch, fourthMatch, fifthMatch, sixthMatch, seventhMatch]
@@ -135,7 +137,6 @@ class MainClassData {
             if egipto.name == match.countryA.name || egipto.name == match.countryB.name {
                 egipto.nextMatches.append(match)
             }
-            
         }
         return matches
     }

@@ -23,6 +23,7 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var countryBButton: UIButton!
     @IBOutlet weak var resultA: UILabel!
     @IBOutlet weak var resultB: UILabel!
+    
     //Variables
     var countrySelected = true
     var match : Match!
@@ -51,31 +52,34 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
             countryBLabel.text = match.countryB.name
             stadiumImage.image = UIImage(named: match.stadium.stadiumImage)
             stadiumName.text = match.stadium.name
-            dateTimeLabel.text = match.date
+            //dateTimeLabel.text = match.date
+            dateTimeLabel.text = Utils.convertFormater(inputShow: match.date!, newFormat: "dd 'de' MMMM '-' HH:mm")
             let imagenA = UIImage (named: match.countryA.shield)
             let imagenB = UIImage (named: match.countryB.shield)
             countryAButton.setImage(imagenA,for: UIControlState.normal)
             countryBButton.setImage(imagenB,for: UIControlState.normal)
             eventsCountryA = match.eventA
             eventsCountryB = match.eventB
-            
             countryVsCountryLabel.text = match.countryA.abbreviation + "vs" + match.countryB.abbreviation
-            
+            let goals = Utils.getGoals(match: match)
             //Identify who is the winner to bold the result
-            if let resultCountryA = match.resultCountryA?.hashValue , let resultCountryB = match.resultCountryB?.hashValue {
-                if (resultCountryA > resultCountryB){
+            if (Utils.compareDate(date: match.date!)){
+                if (goals.0 > goals.1){
                     resultA.font = UIFont.boldSystemFont(ofSize: 16.0)
-                } else if (resultCountryB > resultCountryA){
+                }else if (goals.1 > goals.0){
                     resultB.font = UIFont.boldSystemFont(ofSize: 16.0)
-                } else {
+                }else{
                     resultA.font = UIFont.boldSystemFont(ofSize: 16.0)
                     resultB.font = UIFont.boldSystemFont(ofSize: 16.0)
                 }
+                resultA.text = "- " + String(goals.0)
+                resultB.text = String(goals.1) + " -"
+            }else{
+                resultA.text = " "
+                resultB.text = " "
             }
-            resultA.text = match.resultCountryA?.description
-            resultB.text = match.resultCountryB?.description
+            timeToTimeTableView.reloadData()
         }
-        timeToTimeTableView.reloadData()
     }
     
     //Gets all the events of this match
