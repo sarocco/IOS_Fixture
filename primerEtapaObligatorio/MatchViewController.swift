@@ -63,7 +63,10 @@ class MatchViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let resultCountryA = match.resultCountryA?.hashValue , let resultCountryB = match.resultCountryB?.hashValue {
                 if (resultCountryA > resultCountryB){
                     resultA.font = UIFont.boldSystemFont(ofSize: 16.0)
+                } else if (resultCountryB > resultCountryA){
+                    resultB.font = UIFont.boldSystemFont(ofSize: 16.0)
                 } else {
+                    resultA.font = UIFont.boldSystemFont(ofSize: 16.0)
                     resultB.font = UIFont.boldSystemFont(ofSize: 16.0)
                 }
             }

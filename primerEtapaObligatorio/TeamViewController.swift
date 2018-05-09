@@ -67,13 +67,40 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 50
     }
     
+    //Compare today with the match date
+    func compareDate(date:String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        dateFormatter.dateFormat = "dd 'de' MMMM yyyy HH:mm"
+        // Create a date object from the string
+        if let date = dateFormatter.date(from: date) {
+            if date <= Date() {
+                return false
+            } else {
+                return true
+            }
+        }
+        return false
+    }
+    
+    //Function to get only the next matches since this match
+    func getNextMatches() -> [Match] {
+        var futureMatches: [Match]! = []
+        for match in nextMatches{
+            if (compareDate(date: match.date!)){
+                futureMatches.append(match)
+            }
+        }
+        return futureMatches
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     //Returns how many collections are needed
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return nextMatches.count
+        return getNextMatches().count
     }
     
     //Loads the information of the NextMatches in each collection cell
@@ -81,7 +108,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "idNextMatch", for: indexPath) as! NextMatchesCollectionViewCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 10
-        let match = nextMatches[indexPath.row]
+        let match = getNextMatches()[indexPath.row]
         if (country?.name == match.countryA.name){
             cell.countryImage.image = UIImage(named: match.countryB.shield)
             cell.countryName.text = match.countryB.name
@@ -94,13 +121,13 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.matchDate.text = match.date
             cell.stadiumName.text = match.stadium.name
             return cell
-            
         }
     }
     
+    
     //Send the information of the match you select to the MechView controller
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let match = nextMatches[indexPath.row]
+        let match = getNextMatches()[indexPath.row]
         let vController = storyboard?.instantiateViewController(withIdentifier: "IdentifierMatchViewController") as? MatchViewController
         self.navigationController?.pushViewController(vController!, animated: true)
         vController?.match = match

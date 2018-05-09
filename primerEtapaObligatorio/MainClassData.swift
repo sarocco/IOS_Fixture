@@ -5,7 +5,6 @@
 //  Created by Carolina Rocco on 6/5/18.
 //  Copyright © 2018 UCUDAL. All rights reserved.
 //
-
 class MainClassData {
     
     static func loadData() -> [Match] {
@@ -97,7 +96,7 @@ class MainClassData {
         //Matches
         let firstMatch = Match (date:"02 de Mayo 2018 10:00", group:"Grupo A",  stadium: Stadium(name:"Estadio Central", stadiumImage: "Estadio Central"), countryA: uruguay, countryB: rusia, eventA: eventsUru, eventB:eventsRus, resultCountryA: "2", resultCountryB: "0")
         
-        let secondMatch = Match (date:"08 de Mayo 2018 10:00", group:"Grupo A", stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: uruguay, countryB: egipto, eventA: eventsUru, eventB: eventsEgi)
+        let secondMatch = Match (date:"08 de Mayo 2018 10:00", group:"Grupo A", stadium: Stadium(name:"Samara Arena", stadiumImage: "Samara Arena"), countryA: uruguay, countryB: egipto, eventA: eventsUru, eventB: eventsEgi, resultCountryA: "1", resultCountryB: "1")
         
         let thirdMatch = Match (date:"20 de Mayo 2018 18:00", group:"Grupo A",stadium: Stadium(name:"Volgogrado Arena", stadiumImage: "Volgogrado Arena"), countryA: arabia, countryB: egipto, eventA:[], eventB:[])
         
@@ -110,20 +109,29 @@ class MainClassData {
         
         //All Matches
         let matches = [firstMatch, secondMatch, thirdMatch, fourthMatch, fifthMatch, sixthMatch]
-        
+
+        //Get NextMatches
         for match in matches{
             if uruguay.name == match.countryA.name || uruguay.name == match.countryB.name {
                 uruguay.nextMatches.append(match)
-            } else if rusia.name == match.countryA.name || rusia.name == match.countryB.name {
+            }
+        }
+        for match in matches{
+            if rusia.name == match.countryA.name || rusia.name == match.countryB.name {
                 rusia.nextMatches.append(match)
-            } else if arabia.name == match.countryA.name || arabia.name == match.countryB.name {
+            }
+        }
+        for match in matches{
+            if arabia.name == match.countryA.name || arabia.name == match.countryB.name {
             arabia.nextMatches.append(match)
-            } else if egipto.name == match.countryA.name || egipto.name == match.countryB.name {
+            }
+        }
+        for match in matches{
+            if egipto.name == match.countryA.name || egipto.name == match.countryB.name {
                 egipto.nextMatches.append(match)
             }
             
         }
-        
         return matches
     }
 }

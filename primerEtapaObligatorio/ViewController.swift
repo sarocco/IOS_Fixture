@@ -34,7 +34,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         dateFormatter.dateFormat = "dd 'de' MMMM yyyy HH:mm"
         // Create a date object from the string
         if let date = dateFormatter.date(from: date) {
-            
             if date <= Date() {
                 return true
             } else {
