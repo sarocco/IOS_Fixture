@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Utils: Swift {
+class Utils {
     
     //For one match return the goals from the CountryA and CountryB
     static func getGoals (match: Match) -> (Int,Int) {
